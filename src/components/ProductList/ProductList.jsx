@@ -12,8 +12,12 @@ const ProductList = () => {
         });
     }, []); // 빈 배열로 두면 딱 한번만!! 실행된다.
 
+    const onClickLikeBtn = (setState) => {
+        setState((prev) => !prev);
+    }
+
     return <ProductListWrapper>
-        {productData.map(item => (<Product key={item.id} data={item} />))}
+        {productData.map(item => (<Product key={item.id} data={item} onClickLikeBtn={onClickLikeBtn} />))}
     </ProductListWrapper>;
 }
 

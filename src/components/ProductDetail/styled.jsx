@@ -148,3 +148,34 @@ export const ProductDetailWrapper = styled.section`
     }
   }
 `;
+
+export const DetailSub = styled.div`
+  .txt-product-info {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    color: #333333;
+  }
+
+  .product-info {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    line-height: 40px;
+    border-top: 2px solid #E0E0E0;
+    border-bottom: 2px solid #E0E0E0;
+    display: flex;
+    color:#333333;
+
+    dt {
+      background-color: #F2F2F2;
+      width: 150px;
+      padding-left: 12px;
+    }
+    
+    dd {
+      width: 285px;
+      padding-left: 12px;
+    }
+  }
+`

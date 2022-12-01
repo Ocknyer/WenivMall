@@ -3,11 +3,13 @@ import { ProductWrapper } from "./styled";
 import HeartIcon from '../../asset/icon-heart.svg'
 import HeartOnIcon from '../../asset/icon-heart-on.svg'
 import { useNavigate } from 'react-router-dom'
+import ProductImage from "../ProductImage/ProductImage";
 
-const Product = ({data, onClickLikeBtn }) => {
-    const {thumbnailImg, price, productName, discountRate, id } = data;
+const Product = ({ data, onClickLikeBtn }) => {
+    const { thumbnailImg, price, productName, discountRate, id, stockCount } = data;
     const navigate = useNavigate();
     const [isLike, setIsLike] = useState(false);
+    // const [isSold, setIsSold] = useState(0);
     
     const onClickHandler = () => {
         navigate(`/product/${id}`, {
@@ -18,7 +20,8 @@ const Product = ({data, onClickLikeBtn }) => {
     };
 
     return <ProductWrapper onClick={onClickHandler}>
-        <img src={`https://test.api.weniv.co.kr/${thumbnailImg}`} alt={productName}/>
+        <ProductImage stockCount={stockCount} thumbnailImg={thumbnailImg} productName={productName}/>
+
         <p className="product-title">{productName}</p>
         <button className="like-btn" onClick={(event) => {
             onClickLikeBtn(setIsLike);

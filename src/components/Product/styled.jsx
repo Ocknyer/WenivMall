@@ -5,13 +5,6 @@ export const ProductWrapper = styled.li`
   position: relative;
   cursor: pointer;
 
-> img {
-    width: 380px;
-    height: 380px;
-    border: 1px solid #bdbdbd;
-    border-radius: 10px;
-  }
-
   p {
     line-height: 20px;
     margin-top: 10px;
@@ -70,4 +63,3 @@ export const ProductWrapper = styled.li`
     line-height: 30px;
   }
   `
-;

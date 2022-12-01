@@ -16,9 +16,13 @@ const ProductList = () => {
         setState((prev) => !prev);
     }
 
-    return <ProductListWrapper>
-        {productData.map(item => (<Product key={item.id} data={item} onClickLikeBtn={onClickLikeBtn} />))}
-    </ProductListWrapper>;
+    return (
+        <>
+            <ProductListWrapper>
+                {productData.map(item => (<Product key={item.id} data={item} onClickLikeBtn={onClickLikeBtn} />))}
+            </ProductListWrapper>
+        </>
+    )
 }
 
 export default ProductList;

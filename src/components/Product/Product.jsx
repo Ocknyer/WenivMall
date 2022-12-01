@@ -28,7 +28,7 @@ const Product = ({data, onClickLikeBtn }) => {
         </button>
         <p>
             {/* <strong>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>원 */}
-            <strong>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</strong>원
+            <strong>{(price * 0.01 * (100-discountRate)).toLocaleString()}</strong> 원
             {!!discountRate && (
             <>
                 <span className="discount">{price}원</span>

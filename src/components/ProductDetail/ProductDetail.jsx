@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import cartImg from "../../asset/icon-shopping-cart.svg";
+import cartWhiteImg from "../../asset/icon-shopping-cart-white.svg"
 import heartImg from "../../asset/icon-heart.svg";
 import heartOnImg from "../../asset/icon-heart-on.svg";
 import { ProductDetailWrapper, DetailSub } from "./styled";
@@ -8,8 +9,7 @@ const ProductDetail = ({ locationData }) => {
     const [productData, setProductData] = useState();
     const [count, setCount] = useState(1);
     const [isLike, setIsLike] = useState(false);
-    // console.log(locationData)
-    // console.log(productData)
+    const [isSelected, setIsSelected] = useState("");
 
     useEffect(() => {
         if (locationData) {
@@ -31,6 +31,9 @@ const ProductDetail = ({ locationData }) => {
         }
     }
 
+    const onChangeSelectHandler = (e) => {
+        setIsSelected(e.target.value);
+    }
     
     return (
         // <ProductDetailWrapper>
@@ -55,27 +58,46 @@ const ProductDetail = ({ locationData }) => {
                                     <li className="delivery">
                                         택배배송 / {productData.shippingFee.toLocaleString()}원
                                     </li>
-    
+                                
                                     <li className="quantity">
-                                        <div className="quantity-btn-box">
-                                            <button
-                                                onClick={() => {
-                                                    onClickCountHandler();
-                                                }}
-                                            >
-                                            -
-                                            </button>
-                                            <p>{count}</p>
-                                            <button
-                                                onClick={() => {
-                                                    onClickCountHandler('increment');
-                                                }}
-                                            >
-                                            +
-                                            </button>
-                                        </div>
+                                        {!productData.option.length ? (
+                                            <div className="quantity-btn-box">
+                                                <button
+                                                    onClick={() => {
+                                                        onClickCountHandler();
+                                                    }}
+                                                >
+                                                -
+                                                </button>
+                                                <p>{count}</p>
+                                                <button
+                                                    onClick={() => {
+                                                        onClickCountHandler('increment');
+                                                    }}
+                                                >
+                                                +
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <select className="option-select-box">
+                                                    <option value="0">옵션을 선택하세요</option>
+                                                    {productData && (
+                                                        productData.option.map((item, i) => (
+                                                            <option
+                                                                onClick={onChangeSelectHandler}
+                                                                key={productData.option[i].id}
+                                                                value={productData.option[i].id}
+                                                            >
+                                                                {productData.option[i].optionName}
+                                                            </option>
+                                                        ))
+                                                    )}
+                                                </select>
+                                            </div>
+                                        )}
                                     </li>
-    
+                                    
                                     <li className="product-result-box">
                                         <strong className="result-title">총 상품 금액</strong>
                                         <span className="result-quantity">
@@ -86,12 +108,20 @@ const ProductDetail = ({ locationData }) => {
                                         </span>
                                     </li>
                                 </>
-                            ) : null}
+                            ) : <div className="none-stock-box"></div>}
 
                             <li className="product-btn-box">
-                                <button className="buy-btn">바로 구매</button>
-                                <button className="cart-btn">
-                                    <img src={cartImg} alt="장바구니" />
+                                <button
+                                    className="buy-btn"
+                                    disabled={productData.stockCount ? false : true}
+                                >
+                                    {productData.stockCount ? "바로 구매" : "품절된 상품입니다."}</button>
+                                <button
+                                    className="cart-btn"
+                                    disabled={productData.stockCount ? false : true}
+                                >
+                                    <img src={productData.stockCount ? cartImg : cartWhiteImg} alt="장바구니" />
+                                    {/* <img src={productData.stockCount ? cartImg : cartWhiteImg} alt="장바구니" /> */}
                                 </button>
                                 <button
                                     className="like-btn"

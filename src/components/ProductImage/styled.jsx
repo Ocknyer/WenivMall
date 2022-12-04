@@ -9,6 +9,7 @@ export const ProductImageWrapper = styled.div`
         box-sizing: border-box;
         justify-content: center;
         display: flex;
+        overflow: hidden;
         &::before {
             content: "";
             width: 100%;

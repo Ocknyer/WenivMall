@@ -27,4 +27,10 @@ export const GlobalStyle = createGlobalStyle`
         position: absolute;
         white-space: nowrap;
     }
+
+    select {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+    }
 `

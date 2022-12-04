@@ -33,7 +33,9 @@ const ProductDetail = ({ locationData }) => {
 
     
     return (
-        <ProductDetailWrapper>
+        // <ProductDetailWrapper>
+        <ProductDetailWrapper stockCount = {productData?.stockCount}>
+            {/* {console.log(productData.stockCount)} */}
             <h2 className="hidden">상품 정보 페이지</h2>
             {productData && (
                 <>
@@ -47,37 +49,45 @@ const ProductDetail = ({ locationData }) => {
                             <li className="product-price">
                                 <strong>{(productData.price * 0.01 * (100-productData.discountRate)).toLocaleString()}</strong> 원
                             </li>
-                            <li className="delivery">
-                                택배배송 / {productData.shippingFee.toLocaleString()}원
-                            </li>
-                            <li className="quantity">
-                                <div className="quantity-btn-box">
-                                    <button
-                                        onClick={() => {
-                                            onClickCountHandler();
-                                        }}
-                                    >
-                                    -
-                                    </button>
-                                    <p>{count}</p>
-                                    <button
-                                        onClick={() => {
-                                            onClickCountHandler('increment');
-                                        }}
-                                    >
-                                    +
-                                    </button>
-                                </div>
-                            </li>
-                            <li className="product-result-box">
-                            <strong className="result-title">총 상품 금액</strong>
-                            <span className="result-quantity">
-                                총 수량<strong>{count}</strong>개
-                            </span>
-                                <span className="result-price">
-                                    <strong>{((productData.price * 0.01 * (100-productData.discountRate)) * count).toLocaleString()}</strong> 원
-                                </span>
-                            </li>
+
+                            {productData.stockCount ? (
+                                <>
+                                    <li className="delivery">
+                                        택배배송 / {productData.shippingFee.toLocaleString()}원
+                                    </li>
+    
+                                    <li className="quantity">
+                                        <div className="quantity-btn-box">
+                                            <button
+                                                onClick={() => {
+                                                    onClickCountHandler();
+                                                }}
+                                            >
+                                            -
+                                            </button>
+                                            <p>{count}</p>
+                                            <button
+                                                onClick={() => {
+                                                    onClickCountHandler('increment');
+                                                }}
+                                            >
+                                            +
+                                            </button>
+                                        </div>
+                                    </li>
+    
+                                    <li className="product-result-box">
+                                        <strong className="result-title">총 상품 금액</strong>
+                                        <span className="result-quantity">
+                                            총 수량<strong>{count}</strong>개
+                                        </span>
+                                        <span className="result-price">
+                                            <strong>{((productData.price * 0.01 * (100-productData.discountRate)) * count).toLocaleString()}</strong> 원
+                                        </span>
+                                    </li>
+                                </>
+                            ) : null}
+
                             <li className="product-btn-box">
                                 <button className="buy-btn">바로 구매</button>
                                 <button className="cart-btn">

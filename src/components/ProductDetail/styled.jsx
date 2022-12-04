@@ -131,7 +131,7 @@ export const ProductDetailWrapper = styled.section`
           font-size: 18px;
           line-height: 22px;
           cursor: pointer;
-          background: #6327fe;
+          background: ${({stockCount}) => (!stockCount ? "#BDBDBD" : "#6327fe")};
           color: #fff;
           padding: 19px 0;
           border-radius: 5px;
